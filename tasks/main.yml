@@ -31,37 +31,37 @@
 #       - prelim_tasks
 
 - name: Execute the section 1 tasks
-  import_tasks: section01.yml
-  when: section01_patch | bool
+  include_tasks: section01.yml
+  when: section01_patch
   tags:
       - section01
 
 - name: Execute the section 2 tasks
-  import_tasks: section02.yml
-  when: section02_patch | bool
+  include_tasks: section02.yml
+  when: section02_patch
   tags:
       - section02
 
 - name: Execute the section 9 tasks
-  import_tasks: section09.yml
-  when: section09_patch | bool
+  include_tasks: section09.yml
+  when: section09_patch
   tags:
       - section09
 
 - name: Execute the section 17 tasks
-  import_tasks: section17.yml
-  when: section17_patch | bool
+  include_tasks: section17.yml
+  when: section17_patch
   tags:
       - section17
 
 - name: Execute the section 18 tasks
-  import_tasks: section18.yml
-  when: section18_patch | bool
+  include_tasks: section18.yml
+  when: section18_patch
   tags:
       - section18
 
 - name: Execute the section 19 tasks
-  import_tasks: section19.yml
-  when: section19_patch | bool
+  include_tasks: section19.yml
+  when: section19_patch
   tags:
       - section19
