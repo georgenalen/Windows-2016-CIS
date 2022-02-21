@@ -1,9 +1,6 @@
 ---
 
 collections:
-
 - name: ansible.windows
 
-- name: windows.win_security_policy
-
-- name: windows.win_user_right
+- name: community.windows
