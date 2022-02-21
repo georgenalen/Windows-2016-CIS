@@ -13,8 +13,8 @@ resource "aws_security_group" "allow_ssh" {
   vpc_id = data.aws_vpc.default.id
 
   ingress {
-    from_port   = 22
-    to_port     = 22
+    from_port   = 3389
+    to_port     = 3389
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -73,11 +73,12 @@ resource "aws_instance" "testing_vm" {
   instance_type               = var.instance_type
   tags                        = var.instance_tags
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
+  get_password_data           = true
   user_data     = "${data.template_file.init.rendered}"
   connection {
     type = "winrm"
     user = "Administrator"
-    password = "${var.admin_password}"
+    password = "${rsadecrypt(self.password_data, file(".github/workflows/.ssh/github_actions.pem"))}"
   }
 }
 
