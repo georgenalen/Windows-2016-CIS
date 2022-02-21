@@ -78,7 +78,7 @@ resource "aws_instance" "testing_vm" {
   connection {
     type = "winrm"
     user = "Administrator"
-    password = "${var.admin_password}"
+    password = "${rsadecrypt(self.password_data, file(".github/workflows/.ssh/github_actions.pem"))}"
   }
 }
 
