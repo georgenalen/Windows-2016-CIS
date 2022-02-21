@@ -61,6 +61,9 @@ data "aws_ami" "windows_server_latest_AMI" {
 # used for setting up winrm on host
 data "template_file" "init" {
     template = "${file("${var.user_data_path}")}"
+    vars = {
+      admin_password  = var.admin_password
+    }
 }
 
 resource "aws_instance" "testing_vm" {
