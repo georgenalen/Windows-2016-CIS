@@ -23,11 +23,6 @@ variable "ami_key_pair_name" {
 
 // Taken from the OSname.tfvars
 
-variable "ami_id" {
-  description = "AMI ID"
-  type        = string
-}
-
 variable "ami_os" {
   description = "AMI OS Type"
   type        = string
@@ -38,8 +33,3 @@ variable "ami_username" {
   type        = string
 }
 
-
-variable "ansible_inventory_vars" {
-  description = "variables for ansible inventory"
-  type        = map(string)
-}
