@@ -25,6 +25,7 @@ resource "aws_security_group" "allow_ssh" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
   ingress {
     from_port   = 5986
     to_port     = 5986
@@ -60,10 +61,6 @@ data "aws_ami" "windows_server_latest_AMI" {
 # used for setting up winrm on host
 data "template_file" "init" {
     template = "${file("${var.user_data_path}")}"
-
-    vars {
-      admin_password = "${var.admin_password}"
-    }
 }
 
 resource "aws_instance" "testing_vm" {
@@ -105,5 +102,12 @@ resource "local_file" "inventory" {
         ansible_psrp_cert_validation: ignore
         ansible_psrp_read_timeout: 180
         ansible_psrp_operation_timeout: 120
+        ansible_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          37653537613161656638623932376539323634633636356266313039663365343534393132653337
+          6132626432373735343532343538626230313038383164350a646332366463613137336234346136
+          32336665366631333231376333366561623536616361363166393536636635326237363363373339
+          3365343131363737620a383836343734633663623862383064656462653362326333663336633665
+          3561
     EOF
 }

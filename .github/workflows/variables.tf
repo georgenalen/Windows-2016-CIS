@@ -21,6 +21,10 @@ variable "ami_key_pair_name" {
   default = "github_actions"
 }
 
+variable "user_data_path"{
+  type    = string
+  default = "user_data.txt"
+}
 // Taken from the OSname.tfvars
 
 variable "ami_os" {
