@@ -6,5 +6,3 @@ instance_tags = {
 }
 
 instance_type = "c5.large"
-
-
