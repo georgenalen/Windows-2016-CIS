@@ -102,7 +102,7 @@ resource "local_file" "inventory" {
         ansible_psrp_cert_validation: ignore
         ansible_psrp_read_timeout: 180
         ansible_psrp_operation_timeout: 120
-        admin_password: !vault |
+        ansible_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           37653537613161656638623932376539323634633636356266313039663365343534393132653337
           6132626432373735343532343538626230313038383164350a646332366463613137336234346136
