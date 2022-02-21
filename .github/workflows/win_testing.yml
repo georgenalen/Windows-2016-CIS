@@ -79,7 +79,7 @@ jobs:
         run: cat hosts.yml
 
 # Windows images take a while to come up insert sleep or playbook fails
-      - name: if win2016  - Sleep for 60 seconds
+      - name: if windows2016  - Sleep for 60 seconds
         if: env.TEST_OS == 'windows2016'
         run: sleep 60s
         shell: bash
