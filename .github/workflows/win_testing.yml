@@ -101,6 +101,9 @@ jobs:
           inventory: .github/workflows/hosts.yml
           galaxy_file: collections/requirements.yml
           private_key: ${{ secrets.SSH_PRV_KEY }}
+          connection: winrm
+          timeout: 180
+          vault_password: ${{ secrets.VAULT_KEY }}
 #          verbose: 3
         env:
           ANSIBLE_HOST_KEY_CHECKING: "false"
