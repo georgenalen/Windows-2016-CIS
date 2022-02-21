@@ -40,4 +40,4 @@ travis.env
 benchparse/
 *xccdf.xml
 *.retry
-
+.github/
