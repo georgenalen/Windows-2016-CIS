@@ -53,7 +53,6 @@ data "aws_ami" "windows_server_latest_AMI" {
 
 resource "aws_instance" "testing_vm" {
   ami                         = data.aws_ami.windows_server_latest_AMI.id
-
   associate_public_ip_address = true
   key_name                    = var.ami_key_pair_name # This is the key as known in the ec2 key_pairs
   instance_type               = var.instance_type
