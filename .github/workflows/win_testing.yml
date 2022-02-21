@@ -7,7 +7,7 @@ name: testing_pipeline
 # events but only for the devel branch
 on:
   pull_request_target:
-    types: [opened, reponed, synchronize]
+    types: [opened, reopened, synchronize]
     branches:
       - devel
       - main
@@ -60,7 +60,7 @@ jobs:
         working-directory: .github/workflows
         env:
           windows: ${{ secrets.WINDOWS_PW }}
-        run: echo "admin_passwd    = \"${windows}\""
+        run: echo "admin_password    = \"${windows}\""
 
 ### Build out the server
       - name: Terraform_Init
