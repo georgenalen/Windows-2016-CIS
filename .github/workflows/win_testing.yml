@@ -56,6 +56,15 @@ jobs:
           #ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           #ssh-add .ssh/github_actions.pem
 
+      - name: add secrets
+        working-directory: .github/workflows
+        env:
+          windows: ${{ secrets.WINDOWS_PW }}
+        run: |
+          cat << EOF > secrets.tfvars
+            admin_password   = $windows
+          EOF
+
 ### Build out the server
       - name: Terraform_Init
         working-directory: .github/workflows
@@ -70,17 +79,16 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: terraform apply -var-file "${TEST_OS}.tfvars" --auto-approve
+        run: terraform apply -var-file "${TEST_OS}.tfvars" -var-file "secrets.tfvars" --auto-approve -input=false
 
 ## Debug Section
       - name: DEBUG - Show Ansible hostfile
         if: env.ENABLE_DEBUG == 'true'
         working-directory: .github/workflows
-        run: cat hosts.yml
+        run: cat hosts.yml secrets.tfvars
 
 # Windows images take a while to come up insert sleep or playbook fails
-      - name: if windows2016  - Sleep for 60 seconds
-        if: env.TEST_OS == 'windows2016'
+      - name: Windows slow  - Sleep for 60 seconds
         run: sleep 60s
         shell: bash
 
