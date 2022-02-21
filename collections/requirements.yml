@@ -2,3 +2,5 @@
 
 collections:
 
+- name: windows.win_security_policy
+
