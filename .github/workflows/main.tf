@@ -36,8 +36,23 @@ resource "aws_security_group" "allow_ssh" {
 
 // instance setup
 
+# Logic to get latest Windows ami
+data "aws_ami" "windows_server_latest_AMI" {
+  most_recent = true
+  owners      = ["801119661308"]
+
+  filter {
+    name   = "name"
+    values = ["Windows_Server-2016-English-Full-Base-*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
 resource "aws_instance" "testing_vm" {
-  ami                         = var.ami_id
+  ami                         = data.aws_ami.windows_server_latest_AMI.id
   associate_public_ip_address = true
   key_name                    = var.ami_key_pair_name # This is the key as known in the ec2 key_pairs
   instance_type               = var.instance_type
