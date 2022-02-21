@@ -60,7 +60,7 @@ jobs:
         working-directory: .github/workflows
         env:
           windows: "${{ secrets.WINDOWS_PW }}"
-        run: echo "admin_passwd    = \"${windows}\"" > secrets.tfvars
+        run: echo "admin_password    = \"${windows}\"" > secrets.tfvars
 
 
 ### Build out the server
