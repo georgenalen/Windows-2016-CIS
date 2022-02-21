@@ -59,11 +59,9 @@ jobs:
       - name: add secrets
         working-directory: .github/workflows
         env:
-          windows: ${{ secrets.WINDOWS_PW }}
-        run: |
-          cat << EOF > secrets.tfvars
-            admin_password   = $windows
-          EOF
+          windows: "${{ secrets.WINDOWS_PW }}"
+        run: echo "admin_passwd    = \"${windows}\"" > secrets.tfvars
+
 
 ### Build out the server
       - name: Terraform_Init
