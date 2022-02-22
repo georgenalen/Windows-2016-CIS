@@ -7,4 +7,5 @@ data "template_file" "template_userdata" {
 $admin = [adsi]("WinNT://./administrator, user")
 $admin.PSBase.Invoke("SetPassword", "$${new_admin_pass}")
 </powershell>
+EOF
 }
