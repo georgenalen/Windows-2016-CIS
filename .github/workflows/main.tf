@@ -70,7 +70,7 @@ resource "aws_instance" "testing_vm" {
 }
 
 output "admin_password" {
-  value = "${rsadecrypt(aws_instance.testing_vm.password_data, file("temp_key.pem"))}"
+  value = "${rsadecrypt(aws_instance.testing_vm.password_data, file("test_key.pem"))}"
   sensitive = true
 }
 
@@ -98,6 +98,6 @@ resource "local_file" "inventory" {
         ansible_psrp_cert_validation: ignore
         ansible_psrp_read_timeout: 180
         ansible_psrp_operation_timeout: 120
-        ansible_password: "${rsadecrypt(aws_instance.testing_vm.password_data, file("temp_key.pem"))}"
+        ansible_password: "${rsadecrypt(aws_instance.testing_vm.password_data, file("test_key.pem"))}"
 EOF
 }
