@@ -1,4 +1,4 @@
 <powershell>
 $admin = [adsi]("WinNT://./administrator, user")
-$admin.PSBase.Invoke("SetPassword", "${new_admin_pass}")
+$admin.PSBase.Invoke("SetPassword", "$${new_admin_pass}")
 </powershell>

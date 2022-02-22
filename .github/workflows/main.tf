@@ -58,6 +58,18 @@ data "aws_ami" "windows_server_latest_AMI" {
   }
 }
 
+data "template_file" "template_userdata" {
+  vars = {
+  new_admin_pass  = var.NEW_ADMIN_PASSWORD
+  }
+  template = <<EOF
+<powershell>
+$admin = [adsi]("WinNT://./administrator, user")
+$admin.PSBase.Invoke("SetPassword", "$${new_admin_pass}")
+</powershell>
+EOF
+}
+
 resource "aws_instance" "testing_vm" {
   ami                         = data.aws_ami.windows_server_latest_AMI.id
   associate_public_ip_address = true
