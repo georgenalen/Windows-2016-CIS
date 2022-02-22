@@ -5,7 +5,7 @@ data "template_file" "template_userdata" {
   template = <<EOF
 <powershell>
 $admin = [adsi]("WinNT://./administrator, user")
-$admin.PSBase.Invoke("SetPassword", "$${new_admin_pass}")
+$admin.PSBase.Invoke("SetPassword", "${new_admin_pass}")
 </powershell>
 EOF
 }
