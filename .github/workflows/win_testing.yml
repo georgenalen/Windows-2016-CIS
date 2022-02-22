@@ -73,6 +73,8 @@ jobs:
 ### Build out the server
       - name: Terraform_Init
         working-directory: .github/workflows
+        env:
+          NEW_ADMIN_PASSWORD: ${{ secrets.NEW_ADMIN_PASSWORD }}
         run: terraform init
 
       - name: Terraform_Validate
