@@ -36,9 +36,3 @@ variable "ami_username" {
   description = "Username for the ami id"
   type        = string
 }
-
-// Taken from dynamic secrets from github
-variable "admin_password" {
-  description  = "hidden windows settings"
-  type         = string
-}
