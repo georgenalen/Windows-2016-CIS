@@ -1,12 +1,5 @@
-data "template_file" "template_userdata" {
-  template = file("template_userdata.txt")
+resource "template_file" "template_userdata" {
+  filename = "george_userdata.txt"
   vars = {
-    new_admin_password  = var.NEW_ADMIN_PASSWORD
+    new_admin_pass  = "${var.NEW_ADMIN_PASSWORD}"
   }
-
-<powershell>
-$admin = [adsi]("WinNT://./administrator, user")
-$admin.PSBase.Invoke("SetPassword", "${new_admin_password}")
-Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
-</powershell>
-}
