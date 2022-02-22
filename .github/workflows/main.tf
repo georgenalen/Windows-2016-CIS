@@ -85,6 +85,9 @@ output "admin_password" {
   value = "${rsadecrypt(aws_instance.testing_vm.password_data, file("test_key.pem"))}"
 }
 
+output "showme_amdin" {
+  value = var.NEW_ADMIN_PASSWORD
+}
 // generate inventory file
 resource "local_file" "inventory" {
   filename = "./hosts.yml"
