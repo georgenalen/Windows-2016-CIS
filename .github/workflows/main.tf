@@ -58,17 +58,17 @@ data "aws_ami" "windows_server_latest_AMI" {
   }
 }
 
-data "template_file" "template_userdata" {
-  vars = {
-  new_admin_pass  = var.NEW_ADMIN_PASSWORD
-  }
-  template = <<EOF
-<powershell>
-$admin = [adsi]("WinNT://./administrator, user")
-$admin.PSBase.Invoke("SetPassword", "$${new_admin_pass}")
-</powershell>
-EOF
-}
+# data "template_file" "template_userdata" {
+#   vars = {
+#   new_admin_pass  = var.NEW_ADMIN_PASSWORD
+#   }
+#   template = <<EOF
+# <powershell>
+# $admin = [adsi]("WinNT://./administrator, user")
+# $admin.PSBase.Invoke("SetPassword", "$${new_admin_pass}")
+# </powershell>
+# EOF
+# }
 
 resource "aws_instance" "testing_vm" {
   ami                         = data.aws_ami.windows_server_latest_AMI.id
@@ -78,16 +78,16 @@ resource "aws_instance" "testing_vm" {
   tags                        = var.instance_tags
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   get_password_data           = true
-  user_data     = data.template_file.template_userdata.rendered
+  # user_data     = data.template_file.template_userdata.rendered
 }
 
 output "admin_password" {
-  value = "${rsadecrypt(aws_instance.testing_vm.password_data, file("test_key.pem"))}"
+  value = "${rsadecrypt(self.password_data, file("test_key.pem"))}"
 }
 
-output "showme_amdin" {
-  value = var.NEW_ADMIN_PASSWORD
-}
+# output "showme_amdin" {
+#   value = env.NEW_ADMIN_PASSWORD
+# }
 // generate inventory file
 resource "local_file" "inventory" {
   filename = "./hosts.yml"
