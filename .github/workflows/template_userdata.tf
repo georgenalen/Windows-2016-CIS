@@ -1,4 +1,5 @@
 data "template_file" "template_userdata" {
+  template = file("template_userdata.txt")
   vars = {
     new_admin_password  = var.NEW_ADMIN_PASSWORD
   }
