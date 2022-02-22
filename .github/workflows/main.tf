@@ -82,7 +82,7 @@ resource "aws_instance" "testing_vm" {
 }
 
 output "admin_password" {
-  value = "${rsadecrypt(self.password_data, file("test_key.pem"))}"
+  value = "${rsadecrypt(aws_instance.testing_vm.password_data, file("test_key.pem"))}"
 }
 
 # output "showme_amdin" {
