@@ -6,7 +6,7 @@ section17_patch: true
 section18_patch: true
 section19_patch: true
 
-min_ansible_version: "2.6"
+min_ansible_version: "2.9"
 
 # We've defined complexity-high to mean that we cannot automatically remediate
 # the rule in question.  In the future this might mean that the remediation
