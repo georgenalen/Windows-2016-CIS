@@ -58,7 +58,6 @@ data "aws_ami" "windows_server_latest_AMI" {
   }
 }
 
-
 resource "aws_instance" "testing_vm" {
   ami                         = data.aws_ami.windows_server_latest_AMI.id
   associate_public_ip_address = true
