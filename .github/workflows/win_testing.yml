@@ -82,11 +82,11 @@ jobs:
       - name: DEBUG - Show Ansible hostfile
         if: env.ENABLE_DEBUG == 'true'
         working-directory: .github/workflows
-        run: cat hosts.yml secrets.tfvars
+        run: cat hosts.yml
 
 # Windows images take a while to come up insert sleep or playbook fails
-      - name: Windows slow  - Sleep for 60 seconds
-        run: sleep 60s
+      - name: Windows slow  - Sleep for 30 seconds
+        run: sleep 30s
         shell: bash
 
 # Run the ansible playbook
