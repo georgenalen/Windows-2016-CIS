@@ -59,8 +59,8 @@ jobs:
       - name: add secrets
         working-directory: .github/workflows
         env:
-          windows: ${{ secrets.WINDOWS_PW }}
-        run: echo "admin_password    = \"${windows}\""
+          PRIVATE_KEY: "${{ secrets.SSH_PRV_KEY }}"
+        run: echo $PRIVATE_KEY > temp_key.pem
 
 ### Build out the server
       - name: Terraform_Init
