@@ -66,8 +66,16 @@ resource "aws_instance" "testing_vm" {
   tags                        = var.instance_tags
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   get_password_data           = true
-  user_data     = data.template_file.template_userdata.rendered
+  user_data     = "${template_file.template_userdata.rendered}"
 }
+
+resource "template_file" "template_userdata" {
+  filename = "george_userdata.txt"
+  vars = {
+    new_admin_pass  = "${var.NEW_ADMIN_PASSWORD}"
+  }
+}
+
 output "admin_password" {
   value = "${rsadecrypt(aws_instance.testing_vm.password_data, file("test_key.pem"))}"
 }
