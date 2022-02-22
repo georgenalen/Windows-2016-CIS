@@ -99,6 +99,6 @@ resource "local_file" "inventory" {
         ansible_psrp_cert_validation: ignore
         ansible_psrp_read_timeout: 180
         ansible_psrp_operation_timeout: 120
-        ansible_password: "${admin_password.output}"
+        ansible_password: "${admin_password}"
 EOF
 }
