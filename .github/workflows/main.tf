@@ -58,14 +58,6 @@ data "aws_ami" "windows_server_latest_AMI" {
   }
 }
 
-# used for setting up winrm on host
-data "template_file" "init" {
-    template = "${file("${var.user_data_path}")}"
-    vars = {
-      admin_password  = var.admin_password
-    }
-}
-
 resource "aws_instance" "testing_vm" {
   ami                         = data.aws_ami.windows_server_latest_AMI.id
   associate_public_ip_address = true
@@ -74,12 +66,7 @@ resource "aws_instance" "testing_vm" {
   tags                        = var.instance_tags
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   get_password_data           = true
-  user_data     = "${data.template_file.init.rendered}"
-  connection {
-    type = "winrm"
-    user = "Administrator"
-    password = "${rsadecrypt(self.password_data, file(".github/workflows/.ssh/github_actions.pem"))}"
-  }
+  user_data     = file("ansibleuserdata.ps1")
 }
 
 // generate inventory file
@@ -106,12 +93,12 @@ resource "local_file" "inventory" {
         ansible_psrp_cert_validation: ignore
         ansible_psrp_read_timeout: 180
         ansible_psrp_operation_timeout: 120
-        ansible_password: !vault |
+        admin_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
-          37653537613161656638623932376539323634633636356266313039663365343534393132653337
-          6132626432373735343532343538626230313038383164350a646332366463613137336234346136
-          32336665366631333231376333366561623536616361363166393536636635326237363363373339
-          3365343131363737620a383836343734633663623862383064656462653362326333663336633665
-          3561
-    EOF
+          61656263383566623564366136323130646230373334323164626632633338616662356362613164
+          6136323663386231373233333339303362306436663738300a663735643637313130613966343935
+          32613164613862636663333835623064613032653939646336313266313532373235616635653766
+          3764383631396130360a356132663863643132333635666536663364323634656666643339643235
+          38363965343639366331666636623161663538356639653134376137656532623036    
+EOF
 }
