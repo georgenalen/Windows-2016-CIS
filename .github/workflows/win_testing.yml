@@ -60,7 +60,7 @@ jobs:
         working-directory: .github/workflows
         env:
           PRIVATE_KEY: "${{ secrets.SSH_PRV_KEY }}"
-        run: echo $PRIVATE_KEY > temp_key.pem
+        run: echo $PRIVATE_KEY > test_key.pem
       
       ## Debug Section
       - name: DEBUG - Show paths
