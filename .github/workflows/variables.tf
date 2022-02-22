@@ -40,4 +40,5 @@ variable "ami_username" {
 variable "NEW_ADMIN_PASSWORD" {
   description = "New PW for EC2"
   type        = string
+  default     = "github_actions"
 }
