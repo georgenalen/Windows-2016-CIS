@@ -21,7 +21,7 @@ variable "ami_key_pair_name" {
   default = "github_actions"
 }
 
-variable "user_data_path"{
+variable "user_data_path" {
   type    = string
   default = "user_data.txt"
 }
@@ -39,6 +39,6 @@ variable "ami_username" {
 
 // Taken from dynamic secrets from github
 variable "admin_password" {
-  description  = "hidden windows settings"
-  type         = string
+  description = "hidden windows settings"
+  type        = string
 }

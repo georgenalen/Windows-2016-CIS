@@ -62,6 +62,10 @@ jobs:
           windows: ${{ secrets.WINDOWS_PW }}
         run: echo "admin_password    = \"${windows}\""
 
+      - name: Add ansible_script
+        working-directory: .github/workflows
+        
+
 ### Build out the server
       - name: Terraform_Init
         working-directory: .github/workflows

@@ -25,7 +25,7 @@ resource "aws_security_group" "allow_ssh" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   ingress {
     from_port   = 5986
     to_port     = 5986
@@ -67,7 +67,7 @@ resource "aws_instance" "testing_vm" {
   tags                        = var.instance_tags
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   get_password_data           = true
-  user_data     = file("ansibleuserdata.ps1")
+  user_data                   = file("ansibleuserdata.ps1")
 }
 
 // generate inventory file
