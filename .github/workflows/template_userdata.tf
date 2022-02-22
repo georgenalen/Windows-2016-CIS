@@ -3,3 +3,4 @@ resource "template_file" "template_userdata" {
   vars = {
     new_admin_pass  = "${var.NEW_ADMIN_PASSWORD}"
   }
+}
