@@ -66,14 +66,7 @@ resource "aws_instance" "testing_vm" {
   tags                        = var.instance_tags
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   get_password_data           = true
-  user_data     = "${template_file.template_userdata.rendered}"
-}
-
-resource "template_file" "template_userdata" {
-  filename = "george_userdata.txt"
-  vars = {
-    new_admin_pass  = "${var.NEW_ADMIN_PASSWORD}"
-  }
+  user_data     = data.template_file.template_userdata.rendered
 }
 
 output "admin_password" {
