@@ -77,6 +77,8 @@ jobs:
 
       - name: Terraform_Validate
         working-directory: .github/workflows
+        env:
+          NEW_ADMIN_PASSWORD: ${{ secrets.NEW_ADMIN_PASSWORD }}
         run: terraform validate
 
       - name: Terraform_Apply
