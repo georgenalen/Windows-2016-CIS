@@ -61,6 +61,12 @@ jobs:
         env:
           PRIVATE_KEY: "${{ secrets.SSH_PRV_KEY }}"
         run: echo $PRIVATE_KEY > temp_key.pem
+      
+      ## Debug Section
+      - name: DEBUG - Show Ansible hostfile
+        if: env.ENABLE_DEBUG == 'true'
+        working-directory: .github/workflows
+        run: find ./ -name test_key.pem
 
 ### Build out the server
       - name: Terraform_Init
