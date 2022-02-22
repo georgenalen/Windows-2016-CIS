@@ -37,8 +37,7 @@ variable "ami_username" {
   type        = string
 }
 
-variable "NEW_ADMIN_PASSWORD" {
-  description = "New PW for EC2"
-  type        = string
-  default     = "github_actions"
-}
+// variable "NEW_ADMIN_PASSWORD" {
+//  description = "New PW for EC2"
+//  type        = string
+// }
