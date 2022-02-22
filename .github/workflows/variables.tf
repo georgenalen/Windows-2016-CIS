@@ -36,3 +36,8 @@ variable "ami_username" {
   description = "Username for the ami id"
   type        = string
 }
+
+variable "NEW_ADMIN_PASSWORD" {
+  description = "New PW for EC2"
+  type        = "github_actions"
+}
