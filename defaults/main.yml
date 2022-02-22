@@ -17,6 +17,7 @@ complexity_high: no
 # test 4
 # test 5 
 # test 6
+# test 7
 # Show "changed" for complex items not remediated per complexity-high setting
 # to make them stand out.  "changed" items on a second run of the role would
 # indicate items requiring manual review.
