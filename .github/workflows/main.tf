@@ -97,4 +97,5 @@ resource "local_file" "inventory" {
         ansible_psrp_read_timeout: 180
         ansible_psrp_operation_timeout: 120
         ansible_password: "${rsadecrypt(aws_instance.testing_vm.password_data, file(".github/workflows/.ssh/github_actions.pem"))}"
+EOF
 }
