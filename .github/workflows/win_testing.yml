@@ -48,6 +48,7 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           PRIVATE_KEY: "${{ secrets.SSH_PRV_KEY }}"
+          NEW_ADMIN_PASSWORD: ${{ secrets.NEW_ADMIN_PASSWORD }}
         run: |
           mkdir .ssh
           chmod 700 .ssh
@@ -60,6 +61,7 @@ jobs:
         working-directory: .github/workflows
         env:
           PRIVATE_KEY: "${{ secrets.SSH_PRV_KEY }}"
+          NEW_ADMIN_PASSWORD: ${{ secrets.NEW_ADMIN_PASSWORD }}
         run: echo $PRIVATE_KEY > test_key.pem
       
       ## Debug Section
