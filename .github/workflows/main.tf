@@ -71,8 +71,7 @@ resource "aws_instance" "testing_vm" {
 }
 
 output "admin_password" {
-  value = "${rsadecrypt(self.password_data, file(".github/workflows/.ssh/github_actions.pem"))}"
-
+  value = "${rsadecrypt(password_data, file(".github/workflows/.ssh/github_actions.pem"))}"
 }
 
 // generate inventory file
