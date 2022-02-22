@@ -68,6 +68,9 @@ resource "aws_instance" "testing_vm" {
   get_password_data           = true
   user_data     = file("ansibleuserdata.ps1")
 }
+output "admin_password" {
+  value = "${rsadecrypt(password_data, file(".github/workflows/.ssh/github_actions.pem"))}"
+}
 
 // generate inventory file
 resource "local_file" "inventory" {
@@ -93,6 +96,5 @@ resource "local_file" "inventory" {
         ansible_psrp_cert_validation: ignore
         ansible_psrp_read_timeout: 180
         ansible_psrp_operation_timeout: 120
-        ansible_password: "${rsadecrypt(self.password_data, file(".github/workflows/.ssh/github_actions.pem"))}"
-EOF
+        ansible_password: $admin_password
 }
